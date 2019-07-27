@@ -1,4 +1,5 @@
-var sub =["sem1 sub1","sem1 sub2","sem1 sub3","sem1 sub4","sem1 sub5","sem1 sub6","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",];
+var allSub = ["sem1 sub1","sem1 sub2","sem1 sub3","sem1 sub4","sem1 sub5","sem1 sub6","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",];
+var semSub = Array();
 function dispSemTable()
 {  
     var sem = parseInt(document.getElementById("sem_inp").value);
@@ -17,10 +18,10 @@ function dispSemTable()
         document.getElementById("gen_ms").style.visibility = "visible"; 
         document.getElementById("clr2").style.visibility = "visible"; 
         
-        var i = (sem-1) * 6;
+        /* var i = (sem-1) * 6; */
 
-        for(i=(sem-1) * 6; i < sem * 6 ; i++)
-        { 
+        for(var i=(sem-1) * 6; i < sem * 6; i++)
+        {   
             addRow(i);
         }
 
@@ -51,7 +52,10 @@ function addRow(i)
 
             // SET INPUT ATTRIBUTE.
             label.setAttribute('type', 'text');
-            label.textContent = sub[i];
+            label.textContent = allSub[i];
+
+            var j = i % 6;
+            semSub[j] = allSub[i];
 
             td.appendChild(label);
         }
@@ -81,6 +85,9 @@ function clearData(x)
 function genMarksheet()
 {
     var empTab = document.getElementById("sem_tab");
+    var marks = Array();
+    var totMarks = Array();
+    var perc = Array();
     for( var i=1; i < 7; i++)
     { 
         var emptyFlag = 0;
@@ -90,6 +97,17 @@ function genMarksheet()
             if(document.getElementById("sem_tab").rows[i].cells[j].children[0].value == "")
             {
                 emptyFlag = 1;
+                break;
+            }
+            else
+            {
+                if(j == 1)
+                marks[i] = document.getElementById("sem_tab").rows[i].cells[j].children[0].value;
+                if(j == 2)
+                {
+                    totMarks[i] = document.getElementById("sem_tab").rows[i].cells[j].children[0].value;
+                    perc[i] = (marks[i]/totMarks[i]) * 100;
+                }
             }
         }
         if(emptyFlag == 1)
