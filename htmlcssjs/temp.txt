@@ -10,8 +10,9 @@
     <script src="./marksheet.js"></script>
 </head>
 <body>
-    <form>
+    <form onsubmit="dispSemTable(); return false;">
     <table class="table form-group">
+        <div class="container-fluid col col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <tr>
             <td class="label">Name :</td>
             <td><input class="form-control" type="text" id="name_inp" placeholder="Enter Name" required></td>
@@ -19,43 +20,26 @@
             <td>
               <select class="form-control" id="sem_inp">
                 <option>Select</option>  
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
               </select>
             </td>
-            <td class="label" id="ecode_inp">Exam Code :</td>
+            <td class="label">Exam Code :</td>
             <td><input class="form-control"type="text" placeholder="Enter Exam Code" required></td>
             
         </tr>
+    </div>
     </table>
-    <center><button type="button" class="btn btn-info" onclick="dispSemTable()">Proceed</button></center>
-</form>
-   
-   <br><br>
-   <form onsubmit="genMarksheet(); return false;">
-    <table class="table form-group" id="sem_tab" style="visibility:hidden; text-align: center">
-        <thead>
-            <th>Subject</th>
-            <th>Marks Obtained</th>
-            <th>Total Marks</th>
-        </thead>
-        <tbody>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-        </tbody>
-    </table>
-    <center><button class="btn btn-info" id="gen_ms" style="visibility: hidden">Generate Marksheet</button></center>
+   <center><button class="btn btn-info">Proceed</button></center>
+    <!-- <table class="table form-group">
 
+    </table> -->
 </form>
-
 </body>
 </html>

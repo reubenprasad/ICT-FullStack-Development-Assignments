@@ -5,10 +5,37 @@ table{
 }
 
 button{
-    width: 100%;
+  width: 200px;
+  position: absolute;
+}
+
+.wrapper {
+    text-align: center;
 }
 
 .label{
     font-size: 20px;
     text-align: center;
+    font-weight: normal;
+    border-right:solid rgb(221, 217, 217) 1px;
+}
+
+th{
+    font-size: 20px;
+    text-align: center;
+    font-weight: normal;
+    border: solid black 1px;
+    border-bottom: solid black 1px;
+}
+
+td{
+    border: solid black 1px;
+}
+
+thead{
+    border: solid black 1px;
+}
+
+tbody{
+    border: solid black 1px;
 }
