@@ -1,0 +1,14 @@
+table{
+    border: solid black 2px;
+    margin: 1px;
+    background-color: rgb(221, 217, 217);
+}
+
+button{
+    width: 100%;
+}
+
+.label{
+    font-size: 20px;
+    text-align: center;
+}

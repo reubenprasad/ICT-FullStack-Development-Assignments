@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./marksheet.css">
+    <script src="./marksheet.js"></script>
+</head>
+<body>
+    <form onsubmit="dispSemTable(); return false;">
+    <table class="table form-group">
+        <tr>
+            <td class="label">Name :</td>
+            <td><input class="form-control" type="text" id="name_inp" placeholder="Enter Name" required></td>
+            <td class="label">Semester :</td>
+            <td>
+              <select class="form-control" id="sem_inp">
+                <option>Select</option>  
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+              </select>
+            </td>
+            <td class="label">Exam Code :</td>
+            <td><input class="form-control"type="text" placeholder="Enter Exam Code" required></td>
+            <td><button class="btn btn-info">Proceed</button></td>
+        </tr>
+    </table>
+
+    <table class="table form-group">
+
+    </table>
+</form>
+</body>
+</html>
