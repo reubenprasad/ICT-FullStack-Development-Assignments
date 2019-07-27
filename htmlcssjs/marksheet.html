@@ -10,35 +10,46 @@
     <script src="./marksheet.js"></script>
 </head>
 <body>
-    <form>
-    <table class="table form-group">
-        <tr>
-            <td class="label">Name :</td>
-            <td><input class="form-control" type="text" id="name_inp" placeholder="Enter Name" required></td>
-            <td class="label">Semester :</td>
-            <td>
-              <select class="form-control" id="sem_inp">
-                <option>Select</option>  
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-              </select>
-            </td>
-            <td class="label" id="ecode_inp">Exam Code :</td>
-            <td><input class="form-control"type="text" placeholder="Enter Exam Code" required></td>
-            
-        </tr>
-    </table>
-    <center><button type="button" class="btn btn-info" onclick="dispSemTable()">Proceed</button></center>
-</form>
+    <form id="form1">
+        <table class="table form-group" id="nam_tab">
+            <tr>
+                <td class="label" style="border: none">Name :</td>
+                <td style="border: none"><input class="form-control" type="text" id="name_inp" placeholder="Enter Name" required></td>
+                <td class="label" style="border: none">Semester :</td>
+                <td style="border: none">
+                <select class="form-control" id="sem_inp" required>
+                    <option value="0">Select</option>  
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                </td>
+                <td class="label" style="border: none">Exam Code :</td>
+                <td style="border: none"><input class="form-control" id="ecode_inp" type="text" placeholder="Enter Exam Code" required></td>
+            </tr>
+        </table>
+        <table class="table form-group" style="background-color: white; border:none">
+                <tr style="border: none">
+                        <td style="border: none"></td>
+                        <td style="border: none"></td>
+                            <td style="border: none">
+                                    <button type="button" class="btn btn-info" id="clr1" onclick="clearData(1)">Clear</button> 
+                            </td>
+                                 <td style="border: none"> <button type="button" class="btn btn-success" onclick="dispSemTable()">Proceed</button>
+                                </td>
+                                <td style="border: none"></td>
+                                <td style="border: none"></td>
+                    </tr>
+        </table>
+    </form>
    
    <br><br>
-   <form onsubmit="genMarksheet(); return false;">
+   <form id="form2">
     <table class="table form-group" id="sem_tab" style="visibility:hidden; text-align: center">
         <thead>
             <th>Subject</th>
@@ -53,8 +64,18 @@
             <tr></tr>
         </tbody>
     </table>
-    <center><button class="btn btn-info" id="gen_ms" style="visibility: hidden">Generate Marksheet</button></center>
-
+    <table class="table form-group" style="background-color: white; border:none">
+            <tr style="border: none">
+                    <td style="border: none"></td>
+                    <td style="border: none"></td>
+                        <td style="border: none">
+                                <button type="button" id="clr2" class="btn btn-info" onclick="clearData(2)" style="visibility: hidden">Clear</button> 
+                    </td>
+                    <td style="border: none">   <button type="button" class="btn btn-success" id="gen_ms" style="visibility: hidden" onclick="genMarksheet()">Generate Marksheet</button> </td>
+                    <td style="border: none"></td>
+                    <td style="border: none"></td>
+                </tr>
+    </table>
 </form>
 
 </body>

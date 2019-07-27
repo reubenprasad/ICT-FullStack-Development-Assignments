@@ -2,6 +2,7 @@ table{
     border: solid black 2px;
     margin: 1px;
     background-color: rgb(221, 217, 217);
+    border-collapse: unset;
 }
 
 button{
@@ -25,7 +26,7 @@ th{
     text-align: center;
     font-weight: normal;
     border: solid black 1px;
-    border-bottom: solid black 1px;
+    background-color: rgb(170, 169, 169);
 }
 
 td{
