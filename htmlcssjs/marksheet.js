@@ -29,7 +29,7 @@ function dispSemTable()
     {
         alert("Please fill out all the fields");
     }
-    
+
 }
 
 function addRow(i)
@@ -38,7 +38,7 @@ function addRow(i)
     
     var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
     var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
-    tr = empTab.insertRow(rowCnt);
+    /* tr = empTab.insertRow(rowCnt); */
 
     for (var c = 0; c < 3; c++) 
     {
@@ -80,5 +80,23 @@ function clearData(x)
 
 function genMarksheet()
 {
-
+    var empTab = document.getElementById("sem_tab");
+    for( var i=1; i < 7; i++)
+    { 
+        var emptyFlag = 0;
+        for(var j=1; j<3; j++)
+        {   
+        
+            if(document.getElementById("sem_tab").rows[i].cells[j].children[0].value == "")
+            {
+                emptyFlag = 1;
+            }
+        }
+        if(emptyFlag == 1)
+        {
+            alert("Please fill out all the marks");
+            break;
+        }
+    }
+    
 }
