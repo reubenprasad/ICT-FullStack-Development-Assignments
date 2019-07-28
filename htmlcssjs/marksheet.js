@@ -3,16 +3,16 @@ var semSub = Array();
 function dispSemTable()
 {  
     var sem = parseInt(document.getElementById("sem_inp").value);
-    var empTab = document.getElementById("sem_tab");
+    var semTab = document.getElementById("sem_tab");
     var name = document.getElementById("name_inp").value;
     var ecode = document.getElementById("ecode_inp").value;
 
     if(name.length!=0 && ecode.length!=0 && sem!=0)
     {
-        var rowCount = empTab.rows.length;
+        var rowCount = semTab.rows.length;
         for (var j = rowCount - 1; j > 0; j--) 
         {
-            empTab.deleteRow(j);
+            semTab.deleteRow(j);
         }
         document.getElementById("sem_tab").style.visibility = "visible"; 
         document.getElementById("gen_ms").style.visibility = "visible"; 
@@ -35,24 +35,22 @@ function dispSemTable()
 
 function addRow(i)
 {
-    var empTab = document.getElementById("sem_tab");
+    var semTab = document.getElementById("sem_tab");
     
-    var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
-    var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
-    /* tr = empTab.insertRow(rowCnt); */
-
+    var rowCnt = semTab.rows.length;        // GET TABLE ROW COUNT.
+    var tr = semTab.insertRow(rowCnt);      // TABLE ROW.
+   
     for (var c = 0; c < 3; c++) 
     {
-        var td = document.createElement('td');          // TABLE DEFINITION.
+        var td = document.createElement('td');          // TABLE COLUMN.
         td = tr.insertCell(c);
 
         if (c == 0) {           // FIRST COLUMN.
-            // ADD A BUTTON.
+            
             var label = document.createElement('label');
 
-            // SET INPUT ATTRIBUTE.
             label.setAttribute('type', 'text');
-            label.textContent = allSub[i];
+            label.textContent = allSub[i];          //INSERT SUBJECT NAMES INTO FIRST COLUMN
 
             var j = i % 6;
             semSub[j] = allSub[i];
@@ -60,7 +58,7 @@ function addRow(i)
             td.appendChild(label);
         }
         else {
-            // CREATE AND ADD TEXTBOX IN EACH CELL.
+            // CREATE AND ADD TEXTBOX IN EACH CELL FOR MARKS.
             var ele = document.createElement('input');
             ele.setAttribute('type', 'number');
             ele.setAttribute('min', '0');
@@ -84,10 +82,11 @@ function clearData(x)
 
 function genMarksheet()
 {
-    var empTab = document.getElementById("sem_tab");
+    var semTab = document.getElementById("sem_tab");
     var marks = Array();
     var totMarks = Array();
     var perc = Array();
+    var grade = Array();
     for( var i=1; i < 7; i++)
     { 
         var emptyFlag = 0;
@@ -102,11 +101,12 @@ function genMarksheet()
             else
             {
                 if(j == 1)
-                marks[i] = document.getElementById("sem_tab").rows[i].cells[j].children[0].value;
+                marks[i] = parseFloat(document.getElementById("sem_tab").rows[i].cells[j].children[0].value);
                 if(j == 2)
                 {
-                    totMarks[i] = document.getElementById("sem_tab").rows[i].cells[j].children[0].value;
+                    totMarks[i] = parseFloat(document.getElementById("sem_tab").rows[i].cells[j].children[0].value);
                     perc[i] = (marks[i]/totMarks[i]) * 100;
+                    grade[i] = calcGrade(perc[i]);
                 }
             }
         }
@@ -117,4 +117,66 @@ function genMarksheet()
         }
     }
     
+    /* var resTab = document.getElementById("res_tab");
+
+    var rowCnt = resTab.rows.length;        // GET TABLE ROW COUNT.
+    var tr = resTab.insertRow(rowCnt);      // TABLE ROW.
+
+    for (var c = 0; c < 3; c++) 
+    {
+        var td = document.createElement('td');          // TABLE COLUMN.
+        td = tr.insertCell(c);
+
+        if (c == 0) {           // FIRST COLUMN.
+            var label = document.createElement('label');
+
+            // SET INPUT ATTRIBUTE.
+            label.setAttribute('type', 'text');
+            label.textContent = allSub[i];
+
+            var j = i % 6;
+            semSub[j] = allSub[i];
+
+            td.appendChild(label);
+        }
+        else {
+            // CREATE AND ADD TEXTBOX IN EACH CELL.
+            var ele = document.createElement('input');
+            ele.setAttribute('type', 'number');
+            ele.setAttribute('min', '0');
+            ele.setAttribute('step', '0.01');
+            ele.setAttribute('style', 'border: solid black 1px');
+        
+            ele.required = true;
+
+            td.appendChild(ele);
+        }
+    } */
+
+}
+
+function calcGrade(perc)
+{
+    if(perc >= 95)
+        return("S");
+    else if(perc >= 90)
+        return("A+");
+    else if(perc >= 85)
+        return("A");
+    else if(perc >= 80)
+        return("B+");
+    else if(perc >= 75)
+        return("B");
+    else if(perc >= 70)
+        return("C+");
+    else if(perc >= 65)
+        return("C");
+    else if(perc >= 60)
+        return("D+");
+    else if(perc >= 55)
+        return("D");
+    else if(perc >= 50)
+        return("E");
+    else 
+    return("F");                
 }
