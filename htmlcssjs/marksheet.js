@@ -87,6 +87,7 @@ function genMarksheet()
     var totMarks = Array();
     var perc = Array();
     var grade = Array();
+    var statusFlag = 0;
     for( var i=1; i < 7; i++)
     { 
         var emptyFlag = 0;
@@ -107,6 +108,10 @@ function genMarksheet()
                     totMarks[i] = parseFloat(document.getElementById("sem_tab").rows[i].cells[j].children[0].value);
                     perc[i] = (marks[i]/totMarks[i]) * 100;
                     grade[i] = calcGrade(perc[i]);
+                    if(grade[i] == "F")
+                    {
+                        statusFlag = 1;      // To Check Status - Pass or Fail
+                    }
                 }
             }
         }
@@ -116,42 +121,111 @@ function genMarksheet()
             break;
         }
     }
-    
-    /* var resTab = document.getElementById("res_tab");
-
-    var rowCnt = resTab.rows.length;        // GET TABLE ROW COUNT.
-    var tr = resTab.insertRow(rowCnt);      // TABLE ROW.
-
-    for (var c = 0; c < 3; c++) 
+    if(emptyFlag == 0)
     {
-        var td = document.createElement('td');          // TABLE COLUMN.
-        td = tr.insertCell(c);
+            var resStudTab = document.getElementById("resstud_tab");
+            var rowCnt = resStudTab.rows.length;
+            for (var j = rowCnt; j > 0; j--) 
+            {
+                resStudTab.deleteRow(j);
+            }
+            document.getElementById("resstud_tab").style.visibility = "visible"; 
+            var tr = resStudTab.insertRow(rowCnt);
+            for(var c=0; c<4; c++)
+            {
+                var td = document.createElement("td");
+                td = tr.insertCell(c);
+                if(c == 0)
+                td.textContent = `Name : ${document.getElementById("name_inp").value}`;
+                if(c == 1)
+                td.textContent = `Semester : ${document.getElementById("sem_inp").value}`;
+                if(c == 2)
+                td.textContent = `Exam Code :`;
+                if(c == 3)
+                td.textContent = `${document.getElementById("ecode_inp").value}`;
+            }
 
-        if (c == 0) {           // FIRST COLUMN.
-            var label = document.createElement('label');
+            var resTab = document.getElementById("res_tab");
+            rowCnt =resTab.rows.length;
+            for (var j = rowCnt -1; j > 0; j--) 
+            {
+                resTab.deleteRow(j);
+            }
+            document.getElementById("res_tab").style.visibility = "visible"; 
+            for(var i=1; i < 8 ;i++)
+            {
+                    rowCnt = resTab.rows.length;        // GET TABLE ROW COUNT.
+                    tr = resTab.insertRow(rowCnt);      // TABLE ROW.
 
-            // SET INPUT ATTRIBUTE.
-            label.setAttribute('type', 'text');
-            label.textContent = allSub[i];
+                    for (var c = 0; c < 4; c++) 
+                    {
+                        var td = document.createElement('td');          // TABLE COLUMN.
+                        td = tr.insertCell(c);
 
-            var j = i % 6;
-            semSub[j] = allSub[i];
+                        if (c == 0) 
+                        {           // FIRST COLUMN.
+                            var label = document.createElement('label');
+                            label.setAttribute('type', 'text');
+                            label.textContent = semSub[i-1];
+                            td.appendChild(label);
+                        }
+                        if(c == 1) 
+                        {
+                            var ele = document.createElement('label');
+                            ele.setAttribute('type', 'text');
+                            ele.textContent = marks[i];
+                            td.appendChild(ele);
+                        }
+                        if(c == 2) 
+                        {
+                            if(i<7)
+                            {
+                                var ele = document.createElement('label');
+                                ele.setAttribute('type', 'text');
+                                ele.textContent = totMarks[i];
+                                td.appendChild(ele);
+                            }
+                            else
+                            {
+                            var ele = document.createElement('label');
+                            ele.setAttribute('type', 'text');
+                            ele.textContent = "Status :";
+                            td.appendChild(ele);     
+                            }
+                        }
+                        if(c == 3) 
+                        {
+                            if(i<7)
+                            {
+                            var ele = document.createElement('label');
+                            ele.setAttribute('type', 'text');
+                            ele.textContent = grade[i];
+                            td.appendChild(ele);
+                            }
+                            else
+                            {
+                                if(statusFlag == 0)
+                                {
+                                    var ele = document.createElement('label');
+                                    ele.setAttribute('type', 'text');
+                                    ele.textContent = "Passed";
+                                    td.setAttribute('background-color', 'green');  
+                                    td.appendChild(ele); 
+                                }
+                                else
+                                {
+                                    var ele = document.createElement('label');
+                                    ele.setAttribute('type', 'text');
+                                    ele.textContent = "Failed";
+                                    td.setAttribute('background-color', 'red');  
+                                    td.appendChild(ele); 
+                                }
+                            }
+                        }
 
-            td.appendChild(label);
-        }
-        else {
-            // CREATE AND ADD TEXTBOX IN EACH CELL.
-            var ele = document.createElement('input');
-            ele.setAttribute('type', 'number');
-            ele.setAttribute('min', '0');
-            ele.setAttribute('step', '0.01');
-            ele.setAttribute('style', 'border: solid black 1px');
-        
-            ele.required = true;
-
-            td.appendChild(ele);
-        }
-    } */
+                    }
+            }
+    }
 
 }
 
