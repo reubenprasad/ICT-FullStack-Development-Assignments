@@ -6,20 +6,18 @@ function dispSemTable()
     var semTab = document.getElementById("sem_tab");
     var name = document.getElementById("name_inp").value;
     var ecode = document.getElementById("ecode_inp").value;
-
-    if(name.length!=0 && ecode.length!=0 && sem!=0)
+    var regex = /^[a-zA-Z ]{1,32}$/;                                        //Regular expression for name validation
+    if(name.length!=0 && ecode.length!=0 && sem!=0 && regex.test(name))     //Check if fields are empty
     {
         var rowCount = semTab.rows.length;
         for (var j = rowCount - 1; j > 0; j--) 
         {
             semTab.deleteRow(j);
         }
-        document.getElementById("sem_tab").style.visibility = "visible"; 
+        document.getElementById("sem_tab").style.visibility = "visible";     // Make the marks table and its buttons visible
         document.getElementById("gen_ms").style.visibility = "visible"; 
         document.getElementById("clr2").style.visibility = "visible"; 
         
-        /* var i = (sem-1) * 6; */
-
         for(var i=(sem-1) * 6; i < sem * 6; i++)
         {   
             addRow(i);
@@ -65,33 +63,33 @@ function addRow(i)
             ele.setAttribute('min', '0');
             ele.setAttribute('step', '0.01');
             ele.setAttribute('style', 'border: solid black 1px');
-        
             ele.required = true;
-
             td.appendChild(ele);
         }
     }
 }
 
-function clearData(x)
+function clearData(x)                               //To clear data from tables
 {
     if(x == 1)
     document.getElementById("form1").reset();
     if(x == 2)
     document.getElementById("form2").reset(); 
+    if(x == 3)
+    window.location.reload();
 }
 
-function genMarksheet()
+function genMarksheet()                                 //Generate the final marksheet showing grades and pass or fail status
 {
     var semTab = document.getElementById("sem_tab");
     var marks = Array();
     var totMarks = Array();
     var perc = Array();
     var grade = Array();
-    var statusFlag = 0;
+    var statusFlag = 0;                                 //To find if status is pass or fail based on the grades
     for( var i=1; i < 7; i++)
     { 
-        var emptyFlag = 0;
+        var emptyFlag = 0;                              //To check if any columns are not filled out
         for(var j=1; j<3; j++)
         {   
         
@@ -100,7 +98,7 @@ function genMarksheet()
                 emptyFlag = 1;
                 break;
             }
-            else
+            else                                        //Get marks, total marks from input table and calculate percentage,grade and find status
             {
                 if(j == 1)
                 marks[i] = parseFloat(document.getElementById("sem_tab").rows[i].cells[j].children[0].value);
@@ -111,7 +109,7 @@ function genMarksheet()
                     grade[i] = calcGrade(perc[i]);
                     if(grade[i] == "F")
                     {
-                        statusFlag = 1;      // To Check Status - Pass or Fail
+                        statusFlag = 1;                  // To Check Status - Pass or Fail
                     }
                 }
             }
@@ -122,7 +120,7 @@ function genMarksheet()
             break;
         }
     }
-    if(emptyFlag == 0)
+    if(emptyFlag == 0)                                     //If the marks are all entered correctly , generate the final marksheet
     {
             var resStudTab = document.getElementById("resstud_tab");
             var rowCnt = resStudTab.rows.length;
@@ -131,6 +129,7 @@ function genMarksheet()
                 resStudTab.deleteRow(j);
             }
             document.getElementById("resstud_tab").style.visibility = "visible"; 
+            document.getElementById("clr3").style.visibility = "visible";
             var tr = resStudTab.insertRow(rowCnt);
             for(var c=0; c<3; c++)
             {
@@ -163,7 +162,7 @@ function genMarksheet()
                         td = tr.insertCell(c);
 
                         if (c == 0) 
-                        {           // FIRST COLUMN.
+                        {                                       // FIRST COLUMN.
                             var label = document.createElement('label');
                             label.setAttribute('type', 'text');
                             label.textContent = semSub[i-1];
@@ -185,23 +184,15 @@ function genMarksheet()
                                 ele.textContent = totMarks[i];
                                 td.appendChild(ele);
                             }
-                            /* else
-                            {
-                            var ele = document.createElement('label');
-                            ele.setAttribute('type', 'text');
-                            ele.textContent = "Status :";
-                            td.setAttribute('style', 'text-align: right;font-size:20px');
-                            td.appendChild(ele);     
-                            } */
                         }
                         if(c == 3) 
                         {
                             if(i<7)
                             {
-                            var ele = document.createElement('label');
-                            ele.setAttribute('type', 'text');
-                            ele.textContent = grade[i];
-                            td.appendChild(ele);
+                                var ele = document.createElement('label');
+                                ele.setAttribute('type', 'text');
+                                ele.textContent = grade[i];
+                                td.appendChild(ele);
                             }
                             else
                             {
