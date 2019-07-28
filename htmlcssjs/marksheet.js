@@ -1,4 +1,4 @@
-var allSub = ["sem1 sub1","sem1 sub2","sem1 sub3","sem1 sub4","sem1 sub5","sem1 sub6","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",];
+var allSub = ["Semester 1 Subject 1","Semester 1 Subject 2","Semester 1 Subject 3","Semester 1 Subject 4","Semester 1 Subject 5","Semester 1 Subject 6","Semester 2 Subject 1","Semester 2 Subject 2","Semester 2 Subject 3","Semester 2 Subject 4","Semester 2 Subject 5","Semester 2 Subject 6","Semester 3 Subject 1","Semester 3 Subject 2","Semester 3 Subject 3","Semester 3 Subject 4","Semester 3 Subject 5","Semester 3 Subject 6","Semester 4 Subject 1","Semester 4 Subject 2","Semester 4 Subject 3","Semester 4 Subject 4","Semester 4 Subject 5","Semester 4 Subject 6","Semester 5 Subject 1","Semester 5 Subject 2","Semester 5 Subject 3","Semester 5 Subject 4","Semester 5 Subject 5","Semester 5 Subject 6","Semester 6 Subject 1","Semester 6 Subject 2","Semester 6 Subject 3","Semester 6 Subject 4","Semester 6 Subject 5","Semester 6 Subject 6","Semester 7 Subject 1","Semester 7 Subject 2","Semester 7 Subject 3","Semester 7 Subject 4","Semester 7 Subject 5","Semester 7 Subject 6","Semester 8 Subject 1","Semester 8 Subject 2","Semester 8 Subject 3","Semester 8 Subject 4","Semester 8 Subject 5","Semester 8 Subject 6",];
 var semSub = Array();
 function dispSemTable()
 {  
@@ -43,6 +43,7 @@ function addRow(i)
     for (var c = 0; c < 3; c++) 
     {
         var td = document.createElement('td');          // TABLE COLUMN.
+        /* td.setAttribute('style','width:33.33%'); */
         td = tr.insertCell(c);
 
         if (c == 0) {           // FIRST COLUMN.
@@ -54,7 +55,7 @@ function addRow(i)
 
             var j = i % 6;
             semSub[j] = allSub[i];
-
+            
             td.appendChild(label);
         }
         else {
@@ -131,18 +132,17 @@ function genMarksheet()
             }
             document.getElementById("resstud_tab").style.visibility = "visible"; 
             var tr = resStudTab.insertRow(rowCnt);
-            for(var c=0; c<4; c++)
+            for(var c=0; c<3; c++)
             {
                 var td = document.createElement("td");
+                /* td.setAttribute('style','width:25%'); */
                 td = tr.insertCell(c);
                 if(c == 0)
                 td.textContent = `Name : ${document.getElementById("name_inp").value}`;
                 if(c == 1)
                 td.textContent = `Semester : ${document.getElementById("sem_inp").value}`;
                 if(c == 2)
-                td.textContent = `Exam Code :`;
-                if(c == 3)
-                td.textContent = `${document.getElementById("ecode_inp").value}`;
+                td.textContent = `Exam Code :${document.getElementById("ecode_inp").value}`;
             }
 
             var resTab = document.getElementById("res_tab");
@@ -185,13 +185,14 @@ function genMarksheet()
                                 ele.textContent = totMarks[i];
                                 td.appendChild(ele);
                             }
-                            else
+                            /* else
                             {
                             var ele = document.createElement('label');
                             ele.setAttribute('type', 'text');
                             ele.textContent = "Status :";
+                            td.setAttribute('style', 'text-align: right;font-size:20px');
                             td.appendChild(ele);     
-                            }
+                            } */
                         }
                         if(c == 3) 
                         {
@@ -208,16 +209,16 @@ function genMarksheet()
                                 {
                                     var ele = document.createElement('label');
                                     ele.setAttribute('type', 'text');
-                                    ele.textContent = "Passed";
-                                    td.setAttribute('background-color', 'green');  
+                                    td.setAttribute('style', 'background-color: #9df691;font-size:20px');    
+                                    ele.textContent = "Status : Passed";
                                     td.appendChild(ele); 
                                 }
                                 else
                                 {
                                     var ele = document.createElement('label');
                                     ele.setAttribute('type', 'text');
-                                    ele.textContent = "Failed";
-                                    td.setAttribute('background-color', 'red');  
+                                    td.setAttribute('style', 'background-color: #f691c6;font-size:20px');  
+                                    ele.textContent = "Status : Failed";
                                     td.appendChild(ele); 
                                 }
                             }

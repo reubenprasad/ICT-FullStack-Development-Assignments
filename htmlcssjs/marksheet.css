@@ -36,3 +36,15 @@ thead{
 tbody{
     border: solid black 1px;
 }
+
+#res_tab{
+    text-align: center;
+    
+}
+
+#resstud_tab{
+    text-align: center;
+    font-size: 22px;
+    background-color: rgb(170, 169, 169);
+}
+
